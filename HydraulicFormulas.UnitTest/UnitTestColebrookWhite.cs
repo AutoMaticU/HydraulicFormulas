@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+/// This class contains unit test cases for Colebrook-White equqtion's functions
+/// 
+/// Author: J. Xavier Atero
+/// </summary>
+/// 
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automaticu.HydraulicFormulas.UnitTest
