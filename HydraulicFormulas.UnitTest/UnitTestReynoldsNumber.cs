@@ -7,7 +7,7 @@ namespace Automaticu.HydraulicFormulas.UnitTest
    public class UnitTestReynoldsNumber
    {
       [TestMethod]
-      public void TesReynoldsNumberInRoundPipe()
+      public void TestReynoldsNumberInRoundPipe()
       {
          double ro = 910; // kg / m3
          double u = 2.6; // m / s

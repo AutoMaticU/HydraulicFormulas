@@ -4,10 +4,15 @@
 /// Author: J. Xavier Atero
 /// </summary>
 
+using System;
+using MathNet.Numerics.RootFinding;
+
+
 namespace Automaticu.HydraulicFormulas
 {
    public class HydraulicFormulas
    {
+
       /// <summary>
       /// Reynolds number for flow in a pipe = ρuDH/μ
       /// 
@@ -85,6 +90,30 @@ namespace Automaticu.HydraulicFormulas
       public static double ReynoldsNumberInPipe_Q4_by_nuP(double Q_flow_rate, double nu_kinematic_viscosity, double P_wetted_perimeter)
       {
          return (Q_flow_rate * 4) / (nu_kinematic_viscosity * P_wetted_perimeter);
+      }
+
+      /// <summary>
+      /// Colebrook-White equation using Bisection
+      /// 
+      /// https://en.wikipedia.org/wiki/Darcy_friction_factor_formulae#Colebrook%E2%80%93White_equation
+      /// </summary>
+      public static double CollebrookWhiteBisection(double epsilon_relative_roughness, double DH_hydraulic_diameter, double Re_reynolds_number)
+      {
+         Func<double, double> func = u_f_friction_factor => (1 / Math.Sqrt(u_f_friction_factor)) + 2 * Math.Log10((epsilon_relative_roughness / (3.7 * DH_hydraulic_diameter)) + (2.51 / (Re_reynolds_number * Math.Sqrt(u_f_friction_factor))));
+
+         return Bisection.FindRoot(func, 1e-4, 1, 1e-8);
+      }
+
+      /// <summary>
+      /// Colebrook-White equation using Brent
+      /// 
+      /// https://en.wikipedia.org/wiki/Darcy_friction_factor_formulae#Colebrook%E2%80%93White_equation
+      /// </summary>
+      public static double CollebrookWhiteBrent(double epsilon_relative_roughness, double DH_hydraulic_diameter, double Re_reynolds_number)
+      {
+         Func<double, double> func = u_f_friction_factor => (1 / Math.Sqrt(u_f_friction_factor)) + 2 * Math.Log10((epsilon_relative_roughness / (3.7 * DH_hydraulic_diameter)) + (2.51 / (Re_reynolds_number * Math.Sqrt(u_f_friction_factor))));
+
+         return Brent.FindRoot(func, 1e-4, 1, 1e-8);
       }
    }
 }
