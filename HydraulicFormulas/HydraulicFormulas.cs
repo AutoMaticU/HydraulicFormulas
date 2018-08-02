@@ -1,12 +1,14 @@
 ﻿/// <summary>
-/// This class provides basic hydraulic formulas
+/// This class provides c# implementation for basic hydraulic formulas
+/// 
+/// - Reynolds Number (explicit)
+/// - Colebrook-White (implicit)
 /// 
 /// Author: J. Xavier Atero
 /// </summary>
 
 using System;
 using MathNet.Numerics.RootFinding;
-
 
 namespace Automaticu.HydraulicFormulas
 {
